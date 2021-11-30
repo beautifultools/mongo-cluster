@@ -2,27 +2,27 @@
 
 ## Description
 
-This is a docker image and compose files for mongo db cluster.
+This is a docker image and compose files for mongo db cluster.  
 It is started because it took so long time to configure mongo db cluster using mongo db offical image.
 
 ## Structure
 
 - docker
-  - mongo-js
-    Javascript files for setting config and loading data
-  - security
-    Keyfile for mongodb secure mode. this keyfile should be changed to your own file on production.
-  - shell
-    shell scripts for preparing and starting mongodb cluster
-  - main.sh
+  - mongo-js  
+    Javascript files for setting config and loading data.  
+  - security  
+    Keyfile for mongodb secure mode. this keyfile should be changed to your own file on production.  
+  - shell   
+    shell scripts for preparing and starting mongodb cluster.  
+  - main.sh  
     main shell script for running mongo db deamon.
 - docker-compose
-  - one-network
+  - one-network  
     a compose file for one host(local machine..) and docker swarm.
-  - separated-network
+  - separated-network  
     compose files for multi hosts.
-- util
-  util scripts
+- util  
+  - util scripts
 
 ## How to Start
 
@@ -73,7 +73,7 @@ $ ./stopMongoClusterByCompose.sh -v
 
   - It is commonly prefix of REPLICA_SERVERS
 
-    - eample : replica1/200.
+    - example : replica1/200.
 
 - ADMIN_USER_ID
   - example : admin-user
