@@ -10,6 +10,8 @@ then
         mongo localhost:27017/admin ./mongo-js/mongos.js --quiet -u $(getAdminUserId) -p $(getAdminUserPassword) --authenticationDatabase admin
         sleep 5
     done
+    
+    find ./mongo-js/index-data/ -name "*.js" -exec mongo localhost:27017 {} -u $(getAdminUserId) -p $(getAdminUserPassword) --authenticationDatabase admin \;
 elif [ "$MONGO_TYPE" = "config" ]
 then
     mongod --configsvr --replSet $(getConfigReplicaName) --bind_ip 0.0.0.0 --port 27017 --dbpath /data/db --keyFile ./security/mongodb-keyfile &

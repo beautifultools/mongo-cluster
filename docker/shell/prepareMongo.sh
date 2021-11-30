@@ -46,8 +46,6 @@ then
         done
     
         mongo localhost:27017/admin ./mongo-js/user-admin.js
-        mongo localhost:27017/DOP_ATTRIBUTION ./mongo-js/user-general.js
-        mongo localhost:27017/DOP_LANDING ./mongo-js/user-general.js
     fi
 fi
 
@@ -66,7 +64,7 @@ do
     then 
         break
     else
-        echo "sleep :: $IS_RUNNING" >> ./result.txt
+        echo "Not yet dead :: $IS_RUNNING" >> ./dead_checker_after_prepare.txt
         sleep 1    
     fi
 done

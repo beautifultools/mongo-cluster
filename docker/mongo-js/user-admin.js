@@ -9,7 +9,7 @@ for (let i = 0; i < 60; i++) {
             {
                 user: adminUserId,
                 pwd: adminUserPassword,
-                roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "clusterAdmin"]
+                roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "clusterAdmin", "readWriteAnyDatabase"]
             }
         )
     }
