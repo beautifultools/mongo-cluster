@@ -11,8 +11,6 @@ services:
       - REPLICA_CHECKER=replica1/rs1server
       - ADMIN_USER_ID=admin-user
       - ADMIN_USER_PASSWORD=admin-user-pw
-      - USER_ID=user
-      - USER_PASSWORD=user-pw
     networks:
       - mongo-cluster-net
     ports:
@@ -31,6 +29,7 @@ services:
     environment:
       - MONGO_TYPE=config
       - CONFIG_SERVERS=cfgrs/config1:27017,config2:27017,config3:27017
+      - IS_PRIMARY=true
     networks:
       - mongo-cluster-net
     volumes:
@@ -88,8 +87,7 @@ services:
       - REPLICA_CHECKER=replica1/rs1server
       - ADMIN_USER_ID=admin-user
       - ADMIN_USER_PASSWORD=admin-user-pw
-      - USER_ID=user
-      - USER_PASSWORD=user-pw
+      - IS_PRIMARY=true
     networks:
       - mongo-cluster-net
     volumes:
@@ -111,8 +109,6 @@ services:
       - REPLICA_CHECKER=replica1/rs1server
       - ADMIN_USER_ID=admin-user
       - ADMIN_USER_PASSWORD=admin-user-pw
-      - USER_ID=user
-      - USER_PASSWORD=user-pw
     networks:
       - mongo-cluster-net
     volumes:
@@ -134,8 +130,7 @@ services:
       - REPLICA_CHECKER=replica2/rs2server
       - ADMIN_USER_ID=admin-user
       - ADMIN_USER_PASSWORD=admin-user-pw
-      - USER_ID=user
-      - USER_PASSWORD=user-pw
+      - IS_PRIMARY=true
     networks:
       - mongo-cluster-net
     volumes:
@@ -157,8 +152,6 @@ services:
       - REPLICA_CHECKER=replica2/rs2server
       - ADMIN_USER_ID=admin-user
       - ADMIN_USER_PASSWORD=admin-user-pw
-      - USER_ID=user
-      - USER_PASSWORD=user-pw
     networks:
       - mongo-cluster-net
     volumes:
