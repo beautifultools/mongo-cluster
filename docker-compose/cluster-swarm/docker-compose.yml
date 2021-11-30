@@ -1,0 +1,186 @@
+version: "3.7"
+
+services:
+  mongos:
+    container_name: mongos
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=mongos
+      - CONFIG_SERVERS=cfgrs/config1:27017,config2:27017,config3:27017
+      - REPLICA_SERVERS=replica1/rs1server1:27017,rs1server2:27017
+      - REPLICA_CHECKER=replica1/rs1server
+      - ADMIN_USER_ID=admin-user
+      - ADMIN_USER_PASSWORD=admin-user-pw
+      - USER_ID=user
+      - USER_PASSWORD=user-pw
+    networks:
+      - mongo-cluster-net
+    ports:
+      - 27017:27017
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+  config1:
+    container_name: config1
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=config
+      - CONFIG_SERVERS=cfgrs/config1:27017,config2:27017,config3:27017
+    networks:
+      - mongo-cluster-net
+    volumes:
+      - config1:/data/db
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+  config2:
+    container_name: config2
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=config
+      - CONFIG_SERVERS=cfgrs/config1:27017,config2:27017,config3:27017
+    networks:
+      - mongo-cluster-net
+    volumes:
+      - config2:/data/db
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+  config3:
+    container_name: config3
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=config
+      - CONFIG_SERVERS=cfgrs/config1:27017,config2:27017,config3:27017
+    networks:
+      - mongo-cluster-net
+    volumes:
+      - config3:/data/db
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+  rs1server1:
+    container_name: rs1server1
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica1
+      - REPLICA_SERVERS=replica1/rs1server1:27017,rs1server2:27017
+      - REPLICA_CHECKER=replica1/rs1server
+      - ADMIN_USER_ID=admin-user
+      - ADMIN_USER_PASSWORD=admin-user-pw
+      - USER_ID=user
+      - USER_PASSWORD=user-pw
+    networks:
+      - mongo-cluster-net
+    volumes:
+      - rs1server1:/data/db
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2.5g
+  rs1server2:
+    container_name: rs1server2
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica1
+      - REPLICA_SERVERS=replica1/rs1server1:27017,rs1server2:27017
+      - REPLICA_CHECKER=replica1/rs1server
+      - ADMIN_USER_ID=admin-user
+      - ADMIN_USER_PASSWORD=admin-user-pw
+      - USER_ID=user
+      - USER_PASSWORD=user-pw
+    networks:
+      - mongo-cluster-net
+    volumes:
+      - rs1server2:/data/db
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2.5g
+  rs2server1:
+    container_name: rs2server1
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica2
+      - REPLICA_SERVERS=replica2/rs2server1:27017,rs2server2:27017
+      - REPLICA_CHECKER=replica2/rs2server
+      - ADMIN_USER_ID=admin-user
+      - ADMIN_USER_PASSWORD=admin-user-pw
+      - USER_ID=user
+      - USER_PASSWORD=user-pw
+    networks:
+      - mongo-cluster-net
+    volumes:
+      - rs2server1:/data/db
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2.5g
+  rs2server2:
+    container_name: rs2server2
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica2
+      - REPLICA_SERVERS=replica2/rs2server1:27017,rs2server2:27017
+      - REPLICA_CHECKER=replica2/rs2server
+      - ADMIN_USER_ID=admin-user
+      - ADMIN_USER_PASSWORD=admin-user-pw
+      - USER_ID=user
+      - USER_PASSWORD=user-pw
+    networks:
+      - mongo-cluster-net
+    volumes:
+      - rs2server2:/data/db
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2.5g
+
+volumes:
+  config1: {}
+  config2: {}
+  config3: {}
+  rs1server1: {}
+  rs1server2: {}
+  rs2server1: {}
+  rs2server2: {}
+
+networks:
+  mongo-cluster-net:
+    external: true
