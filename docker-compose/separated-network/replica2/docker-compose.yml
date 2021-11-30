@@ -1,0 +1,66 @@
+version: "3.7"
+
+services:
+  rs2Server1:
+    container_name: rs2Server1
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica2
+      - IS_PRIMARY=true
+      - REPLICA_SERVERS=replica2/200.100.1.16:50001,200.100.1.16:50002,200.100.1.16:50003
+      - REPLICA_CHECKER=replica2/200.100.1
+      - ADMIN_USER_ID=admin-user
+      - ADMIN_USER_PASSWORD=admin-user-pw
+      - MONGOS_IP=200.100.1.104
+    volumes:
+      - rs2Server1:/data/db
+    ports:
+      - 50001:27017
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+  rs2Server2:
+    container_name: rs2Server2
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica2
+    volumes:
+      - rs2Server2:/data/db
+    ports:
+      - 50002:27017
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+
+  rs2Server3:
+    container_name: rs2Server3
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica2
+    volumes:
+      - rs2Server3:/data/db
+    ports:
+      - 50003:27017
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+
+volumes:
+  rs2Server1: {}
+  rs2Server2: {}
+  rs2Server3: {}

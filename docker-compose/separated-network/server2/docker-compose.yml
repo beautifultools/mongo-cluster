@@ -1,0 +1,67 @@
+version: "3.7"
+
+services:
+  config3:
+    container_name: config3
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=config
+      - CONFIG_SERVERS=cfgrs/200.100.1.104:40001,200.100.1.104:40002,200.100.1.146:40003
+      - MONGOS_IP=200.100.1.104
+    volumes:
+      - config3:/data/db
+    ports:
+      - 40003:27017
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+  rs1server2:
+    container_name: rs1server2
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica1
+      - IS_PRIMARY=true
+      - REPLICA_SERVERS=replica1/200.100.1.104:50001,200.100.1.146:50002,200.100.1.146:50003
+      - REPLICA_CHECKER=replica1/200.100.1
+      - ADMIN_USER_ID=admin-user
+      - ADMIN_USER_PASSWORD=admin-user-pw
+      - MONGOS_IP=200.100.1.104
+    volumes:
+      - rs1server2:/data/db
+    ports:
+      - 50002:27017
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 3g
+  rs1server3:
+    container_name: rs1server3
+    image: mongo-cluster
+    environment:
+      - MONGO_TYPE=replica1
+    volumes:
+      - rs1server3:/data/db
+    ports:
+      - 50003:27017
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 3g
+
+volumes:
+  config3: {}
+  rs1server2: {}
+  rs1server3: {}
