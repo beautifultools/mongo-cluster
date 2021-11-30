@@ -52,7 +52,7 @@ fi
 # shutdown server
 if [ "$MONGO_TYPE" = "mongos" ]
 then
-    mongo localhost:27017/admin shutdown-mongos.js &
+    mongo localhost:27017/admin ./mongo-js/shutdown-mongos.js &
 else
     mongod --shutdown &
 fi
