@@ -1,0 +1,6 @@
+# create instance
+aws ec2 run-instances --image-id ami-0c9de937a82e2f06d \
+--count 1 --instance-type m5.large \
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=mongo-cluster},{Key=is-wisetracker,Value=true}]' \
+--key-name wise-dev-seoul \
+--network-interfaces '[ {"DeviceIndex": 0, "Groups": ["sg-0f2515472188498d9", "sg-057766c142dfd9f93"], "SubnetId": "subnet-08c353a5f43443979", "DeleteOnTermination": true, "AssociatePublicIpAddress": true } ]'
