@@ -83,6 +83,12 @@ $ ./stopMongoClusterByCompose.sh -v
   - example : admin-user-pw
   - default value : adminUserPassword
 
+- IS_PRIMARY  
+  - It is used to designate the node that will execute main command out of replica set for preventing multi execution
+  - example : true
+  - default value : false
+
+
 ## License
 
 This is [MIT licensed](LICENSE).
